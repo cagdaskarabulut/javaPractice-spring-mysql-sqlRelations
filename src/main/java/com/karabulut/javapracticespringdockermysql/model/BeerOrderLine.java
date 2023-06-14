@@ -2,15 +2,16 @@ package com.karabulut.javapracticespringdockermysql.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
 @Data
-public class Product {
+@Entity
+public class BeerOrderLine extends ModelCore{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String make;
-    private String model;
+    private Long beerId;
+    private Integer orderQuantity;
 }
