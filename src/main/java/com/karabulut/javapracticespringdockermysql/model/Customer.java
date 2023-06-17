@@ -1,16 +1,18 @@
 package com.karabulut.javapracticespringdockermysql.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@Table(name = "customers")
 public class Customer extends ModelCore{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private String email;
     @OneToMany(mappedBy = "customer")

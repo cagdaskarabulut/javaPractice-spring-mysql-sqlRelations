@@ -2,16 +2,16 @@ package com.karabulut.javapracticespringdockermysql.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@Table(name = "category")
 public class Category extends ModelCore{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String description;
     @Builder.Default
     @ManyToMany

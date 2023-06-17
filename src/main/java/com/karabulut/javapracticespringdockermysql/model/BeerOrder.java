@@ -1,22 +1,24 @@
 package com.karabulut.javapracticespringdockermysql.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@Table(name = "beer-order")
 public class BeerOrder extends ModelCore{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String customerRef;
-    private Long customerId;
     @ManyToOne
     private Customer customer;
 
-    public boolean isNew(){return this.id == null;}
+    public boolean isNew(){return this.getId() == null;}
 
     public void setCustomer(Customer customer){
         this.customer = customer;

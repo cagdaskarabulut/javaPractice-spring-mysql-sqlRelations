@@ -1,15 +1,21 @@
 package com.karabulut.javapracticespringdockermysql.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 
-@Data
+@MappedSuperclass
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
+@SuperBuilder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ModelCore {
     @EqualsAndHashCode.Include
     @ToString.Include
@@ -21,6 +27,20 @@ public class ModelCore {
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdDate;
+    protected String createdBy;
     @UpdateTimestamp
     private Timestamp updatedDate;
+    protected String updatedBy;
+
+    @PrePersist
+    protected void onBaseCreate() {
+        setCreatedBy("ADMIN");
+        setUpdatedBy("ADMIN");
+    }
+
+    @PreUpdate
+    protected void onBaseUpdate() {
+        setUpdatedBy("ADMIN");
+    }
+
 }
